@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* ─── Google Fonts ─────────────────────────────────────────── */
+/* loaded in index.html */
+
+/* ─── CSS Variables: Light Mode ────────────────────────────── */
+:root {
+  /* Layout */
+  --color-background:   #f0f4f9;
+  --color-surface:      #ffffff;
+  --color-surface-2:    #f8fafc;
+  --color-border:       #e2e8f0;
+
+  /* Text */
+  --color-text-primary:   #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted:     #64748b;
+
+  /* Accent — Blue */
+  --color-accent:       #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-fg:    #ffffff;
+
+  /* Danger — Red (used in dark-mode buttons if toggled) */
+  --color-danger:       #dc2626;
+  --color-danger-hover: #b91c1c;
+}
+
+/* ─── CSS Variables: Dark Mode ─────────────────────────────── */
+.dark {
+  --color-background:   #0b0f1a;
+  --color-surface:      #131929;
+  --color-surface-2:    #1a2234;
+  --color-border:       #1e2d45;
+
+  --color-text-primary:   #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted:     #64748b;
+
+  /* In dark mode accent stays blue (change to danger vars to flip to red) */
+  --color-accent:       #3b82f6;
+  --color-accent-hover: #2563eb;
+  --color-accent-fg:    #ffffff;
+
+  --color-danger:       #ef4444;
+  --color-danger-hover: #dc2626;
+}
+
+/* ─── Base ──────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Utility Classes ───────────────────────────────────────── */
+.font-display {
+  font-family: 'Sora', sans-serif;
+}
+
+/* Stagger animation helpers */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Noise texture overlay for hero */
+.noise-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Card glass shimmer */
+.glass-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(12px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12);
+  border-color: var(--color-accent);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
