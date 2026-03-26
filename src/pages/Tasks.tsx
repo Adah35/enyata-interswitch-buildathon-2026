@@ -1,22 +1,23 @@
-
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import {
   PlusCircle,
-  Bell,
-  LogOut,
   Search,
   Briefcase,
-  Zap,
-  SlidersHorizontal,
 } from 'lucide-react'
+
 import Navbar from '../components/NavBar'
-import { api, CURRENT_USER } from '../api/mockApi'
-import type { Task, Notification } from '../api/mockApi'
-import { LoadingScreen, EmptyState, SectionCard, Button, Spinner } from '../components/ui'
-import StatsBar from '../components/StatsBar'
+import { api } from '../api/mockApi'
+import type { Task } from '../api/mockApi'
+
+import {
+  LoadingScreen,
+  EmptyState,
+  SectionCard,
+  Button,
+} from '../components/ui'
+
 import TaskCard from '../components/TaskCard'
-import NotificationsPanel from '../components/Notificationspanel'
 import PostTaskModal from '../components/PostTaskModal'
 import TaskDetailPanel from '../components/Taskdetailpanel'
 
@@ -24,16 +25,14 @@ type DashTab = 'my-tasks' | 'browse'
 
 const CATEGORY_FILTERS = ['All', 'Web & Tech', 'Design', 'Writing', 'Business', 'Local Tasks']
 
-export default function DashboardPage() {
-  const navigate = useNavigate()
-
-  // ── Data state ──────────────────────────────────────────────────────────────
+export default function TasksPage() {
+  // ── Data state ─────────────────────────────────────────
   const [myTasks, setMyTasks] = useState<Task[]>([])
+  const [searchParams] = useSearchParams()
   const [browseTasks, setBrowseTasks] = useState<Task[]>([])
-  const [notifications, setNotifications] = useState<Notification[]>([])
   const [loading, setLoading] = useState(true)
 
-  // ── UI state ────────────────────────────────────────────────────────────────
+  // ── UI state ───────────────────────────────────────────
   const [activeTab, setActiveTab] = useState<DashTab>('my-tasks')
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
   const [showPostModal, setShowPostModal] = useState(false)
@@ -41,26 +40,33 @@ export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('All')
 
-  // ── Load data ───────────────────────────────────────────────────────────────
+  // ── Load data ──────────────────────────────────────────
   useEffect(() => {
     async function load() {
       setLoading(true)
-      const [mine, browse, notifs] = await Promise.all([
+      const [mine, browse] = await Promise.all([
         api.getMyTasks(),
         api.getBrowseTasks(),
-        api.getNotifications(),
       ])
       setMyTasks(mine)
       setBrowseTasks(browse)
-      setNotifications(notifs)
       setLoading(false)
     }
     load()
   }, [])
+  useEffect(() => {
+  const taskId = searchParams.get('taskId')
+  if (!taskId) return
 
-  const unreadCount = notifications.filter(n => !n.read).length
+  const allTasks = [...myTasks, ...browseTasks]
+  const task = allTasks.find(t => t.id === taskId)
 
-  // ── Derived lists ───────────────────────────────────────────────────────────
+  if (task) {
+    setSelectedTask(task)
+  }
+}, [searchParams, myTasks, browseTasks])
+
+  // ── Derived lists ──────────────────────────────────────
   const displayedTasks = (activeTab === 'my-tasks' ? myTasks : browseTasks).filter(t => {
     const matchSearch =
       !searchQuery ||
@@ -70,7 +76,7 @@ export default function DashboardPage() {
     return matchSearch && matchCat
   })
 
-  // ── Handlers ────────────────────────────────────────────────────────────────
+  // ── Handlers ───────────────────────────────────────────
   function handleTaskUpdated(updated: Task) {
     setMyTasks(prev => prev.map(t => (t.id === updated.id ? updated : t)))
     setBrowseTasks(prev => prev.map(t => (t.id === updated.id ? updated : t)))
@@ -84,10 +90,6 @@ export default function DashboardPage() {
     setActiveTab('my-tasks')
   }
 
- 
-
- 
-
   if (loading) return <LoadingScreen />
 
   return (
@@ -96,43 +98,11 @@ export default function DashboardPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        {/* ── Welcome + actions row ──────────────────────────────────────── */}
-        <div className="flex items-start justify-between mb-8 gap-4">
-          <div>
-            <h1
-              className="font-display font-bold text-2xl sm:text-3xl mb-1"
-              style={{ color: 'var(--color-text-primary)' }}
-            >
-              Welcome back, {CURRENT_USER.name.split(' ')[0]}! 👋
-            </h1>
-            <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-              You have {myTasks.filter(t => ['OPEN', 'BIDDING', 'ASSIGNED', 'IN_PROGRESS'].includes(t.status)).length} active tasks
-              {unreadCount > 0 ? ` · ${unreadCount} new notification${unreadCount > 1 ? 's' : ''}` : ''}
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2 flex-shrink-0">
-
-            {/* Post a Task */}
-            <Button
-              variant="primary"
-              onClick={() => setShowPostModal(true)}
-            >
-              <PlusCircle size={15} />
-              Post a Task
-            </Button>
-          </div>
-        </div>
-
-        {/* ── Stats ─────────────────────────────────────────────────────── */}
-        <StatsBar tasks={myTasks} />
-
-        {/* ── Tasks section ─────────────────────────────────────────────── */}
+        {/* ── Tasks section ONLY ───────────────────────────── */}
         <SectionCard>
           {/* Tabs + search row */}
           <div
             className="flex flex-col sm:flex-row sm:items-center gap-3 px-5 py-4 "
-          
           >
             {/* Tabs */}
             <div
@@ -184,6 +154,12 @@ export default function DashboardPage() {
                 onBlur={e => (e.currentTarget.style.borderColor = 'var(--color-border)')}
               />
             </div>
+
+            {/* Post Button (added but matches system) */}
+            <Button variant="primary" onClick={() => setShowPostModal(true)}>
+              <PlusCircle size={15} />
+              Post a Task
+            </Button>
           </div>
 
           {/* Category filters */}
@@ -243,23 +219,9 @@ export default function DashboardPage() {
             </div>
           )}
         </SectionCard>
-
-        {/* Sign out */}
-        <div className="mt-8 text-center">
-          <button
-            onClick={() => navigate('/')}
-            className="text-xs flex items-center gap-1.5 mx-auto transition-colors"
-            style={{ color: 'var(--color-text-muted)' }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#ef4444')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-muted)')}
-          >
-            <LogOut size={13} />
-            Sign out
-          </button>
-        </div>
       </div>
 
-      {/* ── Modals & Panels ──────────────────────────────────────────────── */}
+      {/* Modals */}
       {showPostModal && (
         <PostTaskModal
           onClose={() => setShowPostModal(false)}

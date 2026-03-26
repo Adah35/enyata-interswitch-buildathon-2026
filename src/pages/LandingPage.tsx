@@ -236,7 +236,7 @@ export default function LandingPage() {
           </div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto animate-fade-up delay-300">
+          {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto animate-fade-up delay-300">
             {STATS.map(({ value, label }) => (
               <div
                 key={label}
@@ -253,12 +253,12 @@ export default function LandingPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
       {/* ── CATEGORIES ───────────────────────────────────────────── */}
-      <section className="py-12 border-y" style={{ borderColor: 'var(--color-border)' }}>
+      {/* <section className="py-12 border-y" style={{ borderColor: 'var(--color-border)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-3">
             {CATEGORIES.map(({ icon: Icon, label }) => (
@@ -287,7 +287,7 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── HOW IT WORKS ─────────────────────────────────────────── */}
       <section id="how-it-works" className="py-24">
@@ -458,7 +458,8 @@ export default function LandingPage() {
       </section>
 
       {/* ── TESTIMONIALS ─────────────────────────────────────────── */}
-      <section
+
+      {/* <section
         className="py-24"
         style={{ background: 'var(--color-surface)' }}
       >
@@ -481,7 +482,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {TESTIMONIALS.map(({ name, role, text, avatar, rating }) => (
               <div key={name} className="glass-card rounded-2xl p-6">
-                {/* Stars */}
+                
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: rating }).map((_, i) => (
                     <Star key={i} size={14} fill="#f59e0b" color="#f59e0b" />
@@ -513,7 +514,7 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── PRICING ──────────────────────────────────────────────── */}
       {/* <section id="pricing" className="py-24">

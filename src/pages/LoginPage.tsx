@@ -8,7 +8,7 @@ type Mode = 'login' | 'signup'
 
 export default function LoginPage() {
   const navigate = useNavigate()
-  const { toggleTheme, isDark } = useTheme()
+//   const { toggleTheme, isDark } = useTheme()
   const [mode, setMode] = useState<Mode>('login')
   const [showPass, setShowPass] = useState(false)
   const [role, setRole] = useState<'poster' | 'tasker'>('poster')
@@ -100,7 +100,7 @@ export default function LoginPage() {
       <div className="flex-1 flex flex-col">
         {/* Top bar */}
         <div
-          className="flex items-center justify-between px-6 py-4 border-b"
+          className="flex items-center justify-between px-6 py-4 "
           style={{ borderColor: 'var(--color-border)' }}
         >
           <button
@@ -115,7 +115,7 @@ export default function LoginPage() {
           </button>
 
           {/* Mobile logo */}
-          <Link to="/" className="lg:hidden flex items-center gap-2">
+          {/* <Link to="/" className="lg:hidden flex items-center gap-2">
             <span
               className="w-7 h-7 rounded-lg flex items-center justify-center"
               style={{ background: 'var(--color-accent)' }}
@@ -125,9 +125,9 @@ export default function LoginPage() {
             <span className="font-display font-bold text-lg" style={{ color: 'var(--color-text-primary)' }}>
               Task<span style={{ color: 'var(--color-accent)' }}>ly</span>
             </span>
-          </Link>
+          </Link> */}
 
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="p-2 rounded-lg transition-all duration-200"
             style={{
@@ -137,12 +137,12 @@ export default function LoginPage() {
             }}
           >
             {isDark ? <Sun size={15} /> : <Moon size={15} />}
-          </button>
+          </button> */}
         </div>
 
         {/* Form area */}
         <div className="flex-1 flex items-center justify-center px-6 py-12">
-          <div className="w-full glass-card p-6 rounded-2xl max-w-[480px]">
+          <div className="w-full  p-6 rounded-2xl max-w-[480px]">
             {/* Header */}
             <div className="mb-8">
               <h1
