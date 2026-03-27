@@ -166,40 +166,40 @@ export default function LandingPage() {
           </div>
 
           {/* Headline */}
-          <h1
-            className="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight mb-6 animate-fade-up"
-            style={{ color: 'var(--color-text-primary)' }}
-          >
-            Get any task done,{' '}
-            <span
-              className="relative inline-block"
-              style={{ color: 'var(--color-accent)' }}
-            >
-              brilliantly
-              <svg
-                className="absolute -bottom-1 left-0 w-full"
-                viewBox="0 0 300 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2 8.5c60-6 140-7.5 298-1"
-                  stroke="var(--color-accent)"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  opacity="0.4"
-                />
-              </svg>
-            </span>
-          </h1>
+       <h1
+  className="font-display font-extrabold text-5xl sm:text-6xl lg:text-6xl leading-[1.05] tracking-tight mb-6 animate-fade-up"
+  style={{ color: 'var(--color-text-primary)' }}
+>
+  Get Tasks Done. Or Get Paid{' '}
+  <span
+    className="relative inline-block"
+    style={{ color: 'var(--color-accent)' }}
+  >
+    Doing It.
+    <svg
+      className="absolute -bottom-1 left-0 w-full"
+      viewBox="0 0 300 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2 8.5c60-6 140-7.5 298-1"
+        stroke="var(--color-accent)"
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity="0.4"
+      />
+    </svg>
+  </span>
+</h1>
 
-          <p
-            className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up delay-100"
-            style={{ color: 'var(--color-text-secondary)' }}
-          >
-            Taskly connects people who need work done with talented Taskers ready to deliver.
-            Post a task, receive bids, chat, pay — all in one seamless marketplace.
-          </p>
+<p
+  className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up delay-100"
+  style={{ color: 'var(--color-text-secondary)' }}
+>
+  Taskly connects people who need work done with talented Taskers ready to deliver.
+  Post a task, receive bids, chat, pay — all in one seamless marketplace.
+</p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-up delay-200">

@@ -15,23 +15,31 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    
-    setTimeout(() => {
-      setLoading(false)
-      navigate('/dashboard')
-    }, 1400)
-  }
 
-  const handleGoogle = () => {
-    setGoogleLoading(true)
-    setTimeout(() => {
-      setGoogleLoading(false)
+
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault()
+  setLoading(true)
+  
+  setTimeout(() => {
+    setLoading(false)
+    // 👉 If signup, force wallet setup. If login, go to dashboard.
+    if (mode === 'signup') {
+      navigate('/setup-wallet')
+    } else {
       navigate('/dashboard')
-    }, 1600)
-  }
+    }
+  }, 1400)
+}
+
+const handleGoogle = () => {
+  setGoogleLoading(true)
+  setTimeout(() => {
+    setGoogleLoading(false)
+    // Google users also need a wallet check
+    navigate('/setup-wallet')
+  }, 1600)
+}
 
   return (
     <div

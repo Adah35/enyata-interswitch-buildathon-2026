@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import ChatPage from './pages/ChatPage'
 import TasksPage from './pages/Tasks'
+import SetupWallet from './components/SetupWallet'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path='/chat' element={<ChatPage/>} />
       <Route path='/tasks' element={<TasksPage/>} />
+      <Route path='/setup-wallet' element={<SetupWallet/>} />
     </Routes>
   )
 }

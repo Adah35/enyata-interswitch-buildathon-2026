@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -22,3 +23,20 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+=======
+node_modules
+.env
+TASKLY_BACKEND_MVP.md
+
+
+/frontend/node_modules
+/backend/node_modules
+
+/frontend/.next
+/backend/dist
+
+.env
+.env.*
+
+.DS_Store
+>>>>>>> 596220cadfe8b228080f0a06b43aaa24d6d66a55
