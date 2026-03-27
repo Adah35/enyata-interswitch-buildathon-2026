@@ -1,24 +1,22 @@
-
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   PlusCircle,
-  Bell,
   LogOut,
   Search,
   Briefcase,
-  Zap,
-  SlidersHorizontal,
+  AlertTriangle,
 } from 'lucide-react'
 import Navbar from '../components/NavBar'
 import { api, CURRENT_USER } from '../api/mockApi'
 import type { Task, Notification } from '../api/mockApi'
-import { LoadingScreen, EmptyState, SectionCard, Button, Spinner } from '../components/ui'
+import { LoadingScreen, EmptyState, SectionCard, Button } from '../components/ui'
 import StatsBar from '../components/StatsBar'
 import TaskCard from '../components/TaskCard'
-import NotificationsPanel from '../components/Notificationspanel'
 import PostTaskModal from '../components/PostTaskModal'
 import TaskDetailPanel from '../components/Taskdetailpanel'
+import WalletSetupModal from '../components/WalletSetupModal'
+import { MOCK_WALLET } from '../api/walletUtils'
 
 type DashTab = 'my-tasks' | 'browse'
 
@@ -37,9 +35,13 @@ export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<DashTab>('my-tasks')
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
   const [showPostModal, setShowPostModal] = useState(false)
+  const [showWalletSetup, setShowWalletSetup] = useState(false)
 
   const [searchQuery, setSearchQuery] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('All')
+
+  // Local wallet state so we can update UI instantly after setup
+  const [isWalletSetup, setIsWalletSetup] = useState(MOCK_WALLET.verified)
 
   // ── Load data ───────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -84,9 +86,20 @@ export default function DashboardPage() {
     setActiveTab('my-tasks')
   }
 
- 
+  function handlePostTaskClick() {
+    if (!isWalletSetup) {
+      setShowWalletSetup(true)
+      return
+    }
+    setShowPostModal(true)
+  }
 
- 
+  // Called after successful wallet setup
+  const handleWalletSetupComplete = () => {
+    setShowWalletSetup(false)
+    setIsWalletSetup(true)        // ← This hides the banner instantly
+    // In a real app, you would update the backend/user state here
+  }
 
   if (loading) return <LoadingScreen />
 
@@ -95,6 +108,32 @@ export default function DashboardPage() {
       <Navbar variant="app" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        {/* ── Wallet Setup Banner (Soft Prompt) ───────────────────────────────── */}
+        {!isWalletSetup && (
+          <div className="mb-8 rounded-2xl p-4 flex items-center gap-4 border-l-4"
+            style={{ 
+              background: 'var(--color-surface)', 
+              borderColor: '#f59e0b',
+              color: 'var(--color-text-primary)'
+            }}
+          >
+            <AlertTriangle size={24} style={{ color: '#f59e0b' }} />
+            <div className="flex-1">
+              <p className="font-medium">Complete your wallet setup to start posting or earning</p>
+              <p className="text-sm mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+                You need a verified wallet to post tasks or receive payments.
+              </p>
+            </div>
+            <button
+              onClick={() => setShowWalletSetup(true)}
+              className="px-5 py-2.5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all"
+              style={{ background: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}
+            >
+              Set Up Wallet
+            </button>
+          </div>
+        )}
 
         {/* ── Welcome + actions row ──────────────────────────────────────── */}
         <div className="flex items-start justify-between mb-8 gap-4">
@@ -112,11 +151,9 @@ export default function DashboardPage() {
           </div>
 
           <div className="flex items-center gap-2 flex-shrink-0">
-
-            {/* Post a Task */}
             <Button
               variant="primary"
-              onClick={() => setShowPostModal(true)}
+              onClick={handlePostTaskClick}
             >
               <PlusCircle size={15} />
               Post a Task
@@ -130,10 +167,7 @@ export default function DashboardPage() {
         {/* ── Tasks section ─────────────────────────────────────────────── */}
         <SectionCard>
           {/* Tabs + search row */}
-          <div
-            className="flex flex-col sm:flex-row sm:items-center gap-3 px-5 py-4 "
-          
-          >
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 px-5 py-4">
             {/* Tabs */}
             <div
               className="flex rounded-xl p-1 flex-shrink-0"
@@ -223,7 +257,7 @@ export default function DashboardPage() {
               }
               action={
                 activeTab === 'my-tasks' ? (
-                  <Button variant="primary" onClick={() => setShowPostModal(true)}>
+                  <Button variant="primary" onClick={handlePostTaskClick}>
                     <PlusCircle size={15} />
                     Post a Task
                   </Button>
@@ -272,6 +306,14 @@ export default function DashboardPage() {
           task={selectedTask}
           onClose={() => setSelectedTask(null)}
           onTaskUpdated={handleTaskUpdated}
+        />
+      )}
+
+      {/* Wallet Setup Modal */}
+      {showWalletSetup && (
+        <WalletSetupModal
+          onComplete={handleWalletSetupComplete}   // ← Updated to hide banner instantly
+          onDismiss={() => setShowWalletSetup(false)}
         />
       )}
     </div>

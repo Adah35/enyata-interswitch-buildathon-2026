@@ -4,7 +4,6 @@ import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import ChatPage from './pages/ChatPage'
 import TasksPage from './pages/Tasks'
-import SetupWallet from './components/SetupWallet'
 import WalletPage from './pages/WalletPage'
 
 export default function App() {
