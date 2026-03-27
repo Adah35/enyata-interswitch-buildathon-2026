@@ -3,7 +3,7 @@ import fs from "fs";
 import sgMail from "@sendgrid/mail";
 import { config } from "../config";
 
-sgMail.setApiKey(config.SENDGRID_API_KEY);
+sgMail.setApiKey(config.SENDGRID_API_KEY || " ");
 
 export const sendEmail = async (
   email: string,
