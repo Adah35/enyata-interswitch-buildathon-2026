@@ -20,7 +20,7 @@ import { MOCK_WALLET } from '../api/walletUtils'
 
 type DashTab = 'my-tasks' | 'browse'
 
-const CATEGORY_FILTERS = ['All', 'Web & Tech', 'Design', 'Writing', 'Business', 'Local Tasks']
+const CATEGORY_FILTERS = ['All', 'Delivery & Errands', 'Home & Cooking', 'Beauty & Personal Care', 'Cleaning & Maintenance', 'Local Tasks', 'Others']
 
 const WALLET_SETUP_KEY = 'taskly_wallet_setup_completed'
 
