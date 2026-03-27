@@ -87,8 +87,7 @@ router.patch(
   validate(updateTaskSchema),
   ctrl.update,
 );
-
-// DELETE /api/v1/tasks/:id — POSTER / BOTH (cancels task)
+// DELETE /api/v1/tasks/:id — POSTER / BOTH (cancels  task)
 router.delete('/:id', authorize(UserRole.POSTER, UserRole.BOTH), ctrl.cancel);
 
 export default router;

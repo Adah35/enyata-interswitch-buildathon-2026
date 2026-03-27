@@ -7,7 +7,7 @@ exports.sendMassEmail = exports.sendEmail = void 0;
 // import path from "path";
 const mail_1 = __importDefault(require("@sendgrid/mail"));
 const config_1 = require("../config");
-mail_1.default.setApiKey(config_1.config.SENDGRID_API_KEY);
+mail_1.default.setApiKey(config_1.config.SENDGRID_API_KEY || " ");
 const sendEmail = async (email, subject, message) => {
     // Path to your logo (make sure it exists in your build)
     // const logoPath = path.join(__dirname, "../assets/logo.png");
