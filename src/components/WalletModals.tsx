@@ -2,7 +2,7 @@
 // wallet/WalletModals.tsx — Deposit & Withdraw modals (standalone, reusable)
 // ─────────────────────────────────────────────────────────────────────────────
 import { useState } from 'react'
-import { PlusCircle, Banknote, Zap, Loader2 } from 'lucide-react'
+import { PlusCircle, Banknote, Zap } from 'lucide-react'
 import { ModalShell, ModalHeader, SuccessView, WalletField, SubmitButton, InfoBanner } from './WalletAtoms'
 import { fmtNaira } from '../api/walletUtils'
 import { AlertCircle } from 'lucide-react'

@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import {
-  Shield,
-  Lock,
+  
   CheckCircle2,
   ArrowRight,
   Wallet,
-  Landmark,
+ 
   Loader2,
 } from 'lucide-react'
 

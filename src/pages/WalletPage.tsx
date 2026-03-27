@@ -1,7 +1,4 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// pages/WalletPage.tsx
-// Responsive wallet page aligned with simplified BVN → Bank flow
-// ─────────────────────────────────────────────────────────────────────────────
+
 import { useState } from 'react'
 import {
   Wallet,
@@ -14,7 +11,6 @@ import {
   CreditCard,
   Copy,
   CheckCircle2,
-  ExternalLink,
   PlusCircle,
   BadgeCheck,
 } from 'lucide-react'
@@ -199,7 +195,7 @@ export default function WalletPage() {
             </div>
           ) : (
             <div className="divide-y" style={{ borderColor: 'var(--color-border)' }}>
-              {txs.map((tx, i) => {
+              {txs.map((tx, ) => {
                 const { icon: Icon, color, bg } = TX_META[tx.type]
                 const isCredit = tx.amount > 0
 

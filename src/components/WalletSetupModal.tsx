@@ -7,8 +7,7 @@ import {
   Wallet,
   Lock,
   CheckCircle2,
-  ArrowRight,
-  Loader2,
+  ArrowRight
 } from 'lucide-react'
 import {
   ModalShell,

@@ -2,9 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import {
   ArrowRight,
   CheckCircle2,
-  Star,
-  Briefcase,
-  Users,
   MessageCircle,
   CreditCard,
   Bell,
@@ -15,19 +12,8 @@ import {
   Zap,
   TrendingUp,
   Clock,
-  ChevronRight,
-  Globe,
-  Award,
-  Layers,
 } from 'lucide-react'
 import Navbar from './../components/NavBar'
-
-const STATS = [
-  { value: '50K+', label: 'Active Taskers' },
-  { value: '120K+', label: 'Tasks Completed' },
-  { value: '4.9', label: 'Avg. Rating', icon: Star },
-  { value: '$2M+', label: 'Paid Out' },
-]
 
 const STEPS = [
   {
@@ -98,39 +84,6 @@ const LIFECYCLE = [
   { label: 'In Progress', color: '#f59e0b', desc: 'Assigned Tasker is working' },
   { label: 'Review', color: '#8b5cf6', desc: 'Poster reviewing deliverables' },
   { label: 'Complete', color: '#10b981', desc: 'Approved & payment released' },
-]
-
-const CATEGORIES = [
-  { icon: Globe, label: 'Web & Tech' },
-  { icon: Layers, label: 'Design' },
-  { icon: Briefcase, label: 'Business' },
-  { icon: Award, label: 'Writing' },
-  { icon: Users, label: 'Local Tasks' },
-  { icon: Zap, label: 'Quick Gigs' },
-]
-
-const TESTIMONIALS = [
-  {
-    name: 'Aisha Nwosu',
-    role: 'Poster • Lagos',
-    text: 'I had my logo designed, social copy written, and website fixed — all through Taskly in one week. Absolute game changer.',
-    avatar: 'AN',
-    rating: 5,
-  },
-  {
-    name: 'David Okonkwo',
-    role: 'Tasker • Abuja',
-    text: 'Taskly replaced my freelancing hustle completely. I get quality leads, the chat is smooth, and payments always arrive on time.',
-    avatar: 'DO',
-    rating: 5,
-  },
-  {
-    name: 'Priya Sharma',
-    role: 'Poster • Remote',
-    text: "The escrow system gives me full peace of mind. I've never had a bad experience — every Tasker I've hired has been incredible.",
-    avatar: 'PS',
-    rating: 5,
-  },
 ]
 
 export default function LandingPage() {
@@ -242,12 +195,7 @@ export default function LandingPage() {
                   className="w-full h-auto object-cover"
                 />
                 
-                {/* Optional subtle overlay glow
-               <div className="absolute inset-0 pointer-events-none rounded-3xl"
-                     style={{
-                       background: 'linear-gradient(145deg, rgba(59,130,246,0.08) 0%, transparent 70%)'
-                     }}
-                /> */}
+           
               </div> 
             </div>
           </div>

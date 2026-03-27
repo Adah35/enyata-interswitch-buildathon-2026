@@ -5,7 +5,6 @@ import {
   ArrowLeft,
   MoreVertical,
   Paperclip,
-  Smile,
   CheckCheck,
   Check,
   MessageSquare,

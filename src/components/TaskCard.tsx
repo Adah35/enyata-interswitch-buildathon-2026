@@ -1,4 +1,4 @@
-import { MapPin, Clock, Users, ChevronRight, DollarSign } from 'lucide-react'
+import { MapPin, Clock, Users, ChevronRight } from 'lucide-react'
 import type { Task } from '.././api/mockApi'
 import { StatusBadge, Avatar } from '../components/ui/index'
 import { formatNaira } from '.././api/mockApi'
