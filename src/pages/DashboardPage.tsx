@@ -22,6 +22,8 @@ type DashTab = 'my-tasks' | 'browse'
 
 const CATEGORY_FILTERS = ['All', 'Web & Tech', 'Design', 'Writing', 'Business', 'Local Tasks']
 
+const WALLET_SETUP_KEY = 'taskly_wallet_setup_completed'
+
 export default function DashboardPage() {
   const navigate = useNavigate()
 
@@ -40,8 +42,11 @@ export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('All')
 
-  // Local wallet state so we can update UI instantly after setup
-  const [isWalletSetup, setIsWalletSetup] = useState(MOCK_WALLET.verified)
+  // Persistent wallet setup state (survives refresh)
+  const [isWalletSetup, setIsWalletSetup] = useState(() => {
+    const saved = localStorage.getItem(WALLET_SETUP_KEY)
+    return saved === 'true' || MOCK_WALLET.verified
+  })
 
   // ── Load data ───────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -97,8 +102,8 @@ export default function DashboardPage() {
   // Called after successful wallet setup
   const handleWalletSetupComplete = () => {
     setShowWalletSetup(false)
-    setIsWalletSetup(true)        // ← This hides the banner instantly
-    // In a real app, you would update the backend/user state here
+    setIsWalletSetup(true)
+    localStorage.setItem(WALLET_SETUP_KEY, 'true')   // Persist across refreshes
   }
 
   if (loading) return <LoadingScreen />
@@ -107,27 +112,31 @@ export default function DashboardPage() {
     <div style={{ background: 'var(--color-background)', minHeight: '100vh' }}>
       <Navbar variant="app" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
-        {/* ── Wallet Setup Banner (Soft Prompt) ───────────────────────────────── */}
+        {/* ── Wallet Setup Banner (Responsive) ───────────────────────────────── */}
         {!isWalletSetup && (
-          <div className="mb-8 rounded-2xl p-4 flex items-center gap-4 border-l-4"
+          <div className="mb-8 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 border-l-4"
             style={{ 
               background: 'var(--color-surface)', 
               borderColor: '#f59e0b',
               color: 'var(--color-text-primary)'
             }}
           >
-            <AlertTriangle size={24} style={{ color: '#f59e0b' }} />
+            <AlertTriangle size={24} style={{ color: '#f59e0b', flexShrink: 0 }} />
+            
             <div className="flex-1">
-              <p className="font-medium">Complete your wallet setup to start posting or earning</p>
-              <p className="text-sm mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="font-medium text-base sm:text-lg leading-tight">
+                Complete your wallet setup to start posting or earning
+              </p>
+              <p className="text-sm mt-1" style={{ color: 'var(--color-text-muted)' }}>
                 You need a verified wallet to post tasks or receive payments.
               </p>
             </div>
+
             <button
               onClick={() => setShowWalletSetup(true)}
-              className="px-5 py-2.5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl font-semibold text-sm whitespace-nowrap transition-all mt-2 sm:mt-0"
               style={{ background: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}
             >
               Set Up Wallet
@@ -136,7 +145,7 @@ export default function DashboardPage() {
         )}
 
         {/* ── Welcome + actions row ──────────────────────────────────────── */}
-        <div className="flex items-start justify-between mb-8 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
           <div>
             <h1
               className="font-display font-bold text-2xl sm:text-3xl mb-1"
@@ -150,10 +159,11 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex-shrink-0">
             <Button
               variant="primary"
               onClick={handlePostTaskClick}
+              className="w-full sm:w-auto"
             >
               <PlusCircle size={15} />
               Post a Task
@@ -312,7 +322,7 @@ export default function DashboardPage() {
       {/* Wallet Setup Modal */}
       {showWalletSetup && (
         <WalletSetupModal
-          onComplete={handleWalletSetupComplete}   // ← Updated to hide banner instantly
+          onComplete={handleWalletSetupComplete}
           onDismiss={() => setShowWalletSetup(false)}
         />
       )}
