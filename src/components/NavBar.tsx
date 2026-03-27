@@ -171,14 +171,8 @@ export default function Navbar({ variant = 'landing' }: NavbarProps) {
             {/* Desktop centre links */}
             <div className="hidden md:flex items-center gap-1">
               {isLanding
-                ? LANDING_LINKS.map(({ to, label }) => (
-                    <a key={to} href={to}
-                      className="text-sm px-3 py-2 rounded-lg transition-all font-medium"
-                      style={{ color: 'var(--color-text-secondary)' }}
-                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text-primary)')}
-                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-secondary)')}>
-                      {label}
-                    </a>
+                ? LANDING_LINKS.map(({ }) => (
+                   <></>
                   ))
                 : APP_LINKS.map(({ to, icon: Icon, label }) => (
                     <Link key={to} to={to}

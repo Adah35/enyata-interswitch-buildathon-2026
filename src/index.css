@@ -6,9 +6,9 @@
 /* ─── CSS Variables: Light Mode ────────────────────────────── */
 :root {
   /* Layout */
-  --color-background:   #f0f4f9;
+  --color-background:   #f8fafc;
   --color-surface:      #ffffff;
-  --color-surface-2:    #f8fafc;
+  --color-surface-2:    #f1f5f9;
   --color-border:       #e2e8f0;
 
   /* Text */
@@ -16,32 +16,35 @@
   --color-text-secondary: #334155;
   --color-text-muted:     #64748b;
 
-  /* Accent — Blue */
+  /* Accent — Blue (kept only for interactive elements) */
   --color-accent:       #2563eb;
   --color-accent-hover: #1d4ed8;
   --color-accent-fg:    #ffffff;
 
-  /* Danger — Red (used in dark-mode buttons if toggled) */
-  --color-danger:       #dc2626;
-  --color-danger-hover: #b91c1c;
+  /* Danger */
+  --color-danger:       #ef4444;
+  --color-danger-hover: #dc2626;
 }
 
-/* ─── CSS Variables: Dark Mode ─────────────────────────────── */
+/* ─── CSS Variables: Dark Mode (Completely Neutral - No Blue Tint) ─────────── */
 .dark {
-  --color-background:   #0b0f1a;
-  --color-surface:      #131929;
-  --color-surface-2:    #1a2234;
-  --color-border:       #1e2d45;
+  /* Extremely dark, neutral backgrounds - no blue/cyan */
+  --color-background:   #050505;     /* Near black */
+  --color-surface:      #0f0f0f;     /* Deep neutral dark */
+  --color-surface-2:    #171717;     /* Slightly lighter neutral */
+  --color-border:       #262626;     /* Neutral dark gray */
 
-  --color-text-primary:   #f1f5f9;
-  --color-text-secondary: #cbd5e1;
-  --color-text-muted:     #64748b;
+  /* Clean, high-contrast text */
+  --color-text-primary:   #fafafa;     /* Almost white */
+  --color-text-secondary: #e5e5e5;     /* Light gray */
+  --color-text-muted:     #a3a3a3;     /* Muted gray */
 
-  /* In dark mode accent stays blue (change to danger vars to flip to red) */
+  /* Accent stays blue only for buttons/links (as requested) */
   --color-accent:       #3b82f6;
   --color-accent-hover: #2563eb;
   --color-accent-fg:    #ffffff;
 
+  /* Danger */
   --color-danger:       #ef4444;
   --color-danger-hover: #dc2626;
 }
@@ -58,7 +61,7 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
@@ -68,7 +71,7 @@ body {
 
 /* ─── Utility Classes ───────────────────────────────────────── */
 .font-display {
-  font-family: 'Sora', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 /* Stagger animation helpers */
@@ -97,40 +100,31 @@ body {
 }
 .glass-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   border-color: var(--color-accent);
 }
+
+/* Animations */
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
-.animate-slide-in-left {
-  animation: slideInLeft 0.8s ease-out forwards;
-}
+.animate-slide-in-left  { animation: slideInLeft  0.8s ease-out forwards; }
+.animate-slide-in-right { animation: slideInRight 0.8s ease-out 0.2s forwards; opacity: 0; }
 
-.animate-slide-in-right {
-  animation: slideInRight 0.8s ease-out 0.2s forwards;
-  opacity: 0; /* starts hidden */
-}
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb { 
+  background: var(--color-border); 
+  border-radius: 3px; 
+}
+::-webkit-scrollbar-thumb:hover { 
+  background: #3f3f46; 
+}

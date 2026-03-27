@@ -94,27 +94,21 @@ export default function LandingPage() {
       <Navbar variant="landing" />
 
       {/* ── HERO ─────────────────────────────────────────────────── */}
-
-    
-           {/* ── HERO ─────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden min-h-[90vh] flex items-center" id="hero">
         {/* Background gradient blob */}
         <div
           className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full opacity-10 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, #3b82f6 0%, transparent 70%)' }}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-24 md:pb-20 relative w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-18 pb-16 relative w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
             {/* LEFT: Text Content */}
             <div className="space-y-8 lg:pr-8 animate-slide-in-left">
-          
-
-              {/* Headline */}
+              {/* Headline - Space Grotesk */}
               <h1
-                className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl leading-[1.05] tracking-tight"
-                style={{ color: 'var(--color-text-primary)' }}
+                className="font-display font-bold text-4xl sm:text-5xl md:text-6xl leading-[1.05] tracking-tight"
+                style={{ color: 'var(--color-text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}
               >
                 Get Tasks Done. Or Get Paid{' '}
                 <span
@@ -184,18 +178,15 @@ export default function LandingPage() {
             </div>
 
             {/* RIGHT: Image / Mockup Area */}
-           <div className="hidden lg:flex justify-center lg:justify-end animate-slide-in-right">
+            <div className="hidden lg:flex justify-center lg:justify-end animate-slide-in-right">
               <div 
-                className="relative w-full max-w-[520px] rounded-3xl overflow-hidden "
-             
+                className="relative w-full max-w-[520px] rounded-3xl overflow-hidden"
               >
                 <img 
                   src="/image-2.png"   
                   alt="Taskly App Interface"
                   className="w-full h-auto object-cover"
                 />
-                
-           
               </div> 
             </div>
           </div>
@@ -279,9 +270,7 @@ export default function LandingPage() {
             Full transparency at every stage
           </h2>
 
-          {/* Timeline - 2 on mobile, 5 on larger screens */}
           <div className="relative flex flex-wrap sm:flex-nowrap items-start justify-center gap-x-8 gap-y-10 md:gap-y-0">
-            {/* Connector line - only visible on md+ */}
             <div
               className="hidden md:block absolute top-5 left-[10%] right-[10%] h-px"
               style={{ background: 'var(--color-border)' }}
@@ -467,7 +456,7 @@ export default function LandingPage() {
             className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t text-sm gap-4"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
           >
-            <span>© 2025 Taskly Inc. All rights reserved.</span>
+            <span>© 202 Taskly. All rights reserved.</span>
             <div className="flex items-center gap-1">
               <span>Made with</span>
               <span style={{ color: '#ef4444' }}>♥</span>
