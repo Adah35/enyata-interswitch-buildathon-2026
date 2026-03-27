@@ -98,6 +98,7 @@ export default function LandingPage() {
         {/* Background gradient blob */}
         <div
           className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, #3b82f6 0%, transparent 70%)' }}
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-18 pb-16 relative w-full">
